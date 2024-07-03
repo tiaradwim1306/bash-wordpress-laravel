@@ -1,3 +1,4 @@
+# Install paket
 sudo apt update
 sudo apt install nginx -y
 sudo add-apt-repository ppa:ondrej/php
@@ -33,7 +34,7 @@ chown -R www-data:www-data /var/www/wordpress
 chmod -R 755 /var/www/wordpress
 #SSL
 sudo apt install certbot python3-certbot-nginx -y
-sudo certbot --nginx certonly -d tiara.sysadmin13.my.id
+sudo certbot --nginx certonly -d tiara.efs.my.id
 #buat VHost
 rm /etc/nginx/sites-enabled/default
 touch /etc/nginx/sites-available/wordpress
@@ -41,13 +42,13 @@ vhost1="/etc/nginx/sites-available/wordpress"
 cat << EOF > $vhost1
 server {
     listen 443 ssl;
-    server_name tiara.sysadmin13.my.id;
+    server_name tiara.efs.my.id;
 
     root /var/www/wordpress;
     index index.php index.html index.htm;
 
-    ssl_certificate /etc/letsencrypt/live/tiara.sysadmin13.my.id/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/tiara.sysadmin13.my.id/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/tiara.efs.my.id/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/tiara.efs.my.id/privkey.pem;
 
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
@@ -126,4 +127,5 @@ EOF
 ln /etc/nginx/sites-available/laravel /etc/nginx/sites-enabled/laravel
 systemctl restart nginx
 
+echo "Program Selesai"
 
